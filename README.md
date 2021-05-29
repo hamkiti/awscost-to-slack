@@ -45,16 +45,20 @@ aws configure list
 <br>
 
 ## 始め方
-### awscost-to-slack用ののaws Lambda関数を一から作成
-#### 名前
+### AWSのコンソールでawscost-to-slack用のLambda関数を一から作成
+
+設定内容
+```
+# 名前
 awscost_to_slack
 
-#### ランタイム
+# ランタイム
 Python 3.x
 
-#### 実行ロール
+# 実行ロール
 新規 or 既存　で設定
 関数作成後、ロールに`CloudWatchReadOnlyAccess`の権限を追加
+```
 
 <br>
 
@@ -85,14 +89,14 @@ src/lambda.json
 ```
 
 
-### lambda-uploaderでデプロイ
+### srcディレクトリの内容をlambda-uploaderでデプロイ
 ```
-% cd src
-% lambda-uploader
+cd src
+lambda-uploader
 ```
 
 ### Lambda定期実行設定
-CloudWatchのスケジュールイベントを定義して、lambda関数をターゲットに指定する
+CloudWatchのスケジュールイベントを定義して、Lambda関数をターゲットに指定する
 
 ### Slackで通知確認を行う
 CloudWatchのスケジュールイベントの時刻に通知がきているか確認
