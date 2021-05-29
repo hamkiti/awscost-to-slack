@@ -8,7 +8,7 @@ https://qiita.com/isobecky74/items/88e8e0dcb0ee224a31e4
 <br>
 
 ## 事前準備
-### python(バージョン3.8以上)をインストール
+### python(バージョン3.6以上)をインストール
 参考サイト：https://prog-8.com/docs/python-env
 
 ### lambda-uploaderをインストール
