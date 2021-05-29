@@ -95,7 +95,7 @@ src/lambda.json
 CloudWatchのスケジュールイベントを定義して、lambda関数をターゲットに指定する
 
 ### Slackで通知確認を行う
-CloudWatchのスケジュールイベントの時刻に確認
+CloudWatchのスケジュールイベントの時刻に通知がきているか確認
 
 
 
