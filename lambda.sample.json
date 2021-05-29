@@ -1,14 +1,15 @@
 {
   "name": "awscost_to_slack",
   "description": "DESCRIPTION",
-  "region": "ap-northeast-1",
+  "region": "{AWSリージョンのコード}",
   "handler": "lambda_function.lambda_handler",
-  "role": "arn:aws:iam::*********:role/service-role/awscost_to_slack-role-*****",
+  "role": "{Lambda関数を実行するロールのARN}",
   "timeout": 300,
   "memory": 128,
   "variables":
     {
-      "slackPostURL":"https://hooks.slack.com/services/*****",
-      "slackChannel":"#aws課金通知"
+      "slackPostURL":"{Slack の WebhookURL}",
+      "slackChannel":"{#チャンネル名}",
+      "subject":"誰かのAWSアカウントの利用料金"
     }
 }
