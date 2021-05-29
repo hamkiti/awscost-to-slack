@@ -14,6 +14,7 @@ logger.setLevel(logging.INFO)
 # Slack の設定
 SLACK_POST_URL = os.environ['slackPostURL']
 SLACK_CHANNEL = os.environ['slackChannel']
+MESSAGE_SUBJECT = os.environ['messageSubject']
 
 response = boto3.client('cloudwatch', region_name='us-east-1')
 
@@ -44,7 +45,7 @@ def build_message(cost):
 
     text = "%sまでのAWSの料金は、$%sです。" % (date, cost)
 
-    atachements = {"text":text,"color":color}
+    atachements = {"title": MESSAGE_SUBJECT,"text":text,"color":color}
     return atachements
 
 def lambda_handler(event, context):
