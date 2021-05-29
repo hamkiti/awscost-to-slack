@@ -10,6 +10,6 @@
     {
       "slackPostURL":"{Slack の WebhookURL}",
       "slackChannel":"{#チャンネル名}",
-      "subject":"誰かのAWSアカウントの利用料金"
+      "messageSubject":"誰かのAWSアカウントの利用料金"
     }
 }
