@@ -77,22 +77,29 @@ src/lambda.json
   "region": "ap-northeast-1", // AWSリージョンのコード
   "handler": "lambda_function.lambda_handler",
   "role": "arn:aws:iam::***:role/service-role/awscost_to_slack-role-***", // 実行ロールのARN
-  "timeout": 300,
-  "memory": 128,
-  "variables":
-    {
-      "slackPostURL":"https://hooks.slack.com/services/*****", // SlackのWebhookURL
-      "slackChannel":"#aws課金通知", // Slackのチャンネル名
-      "messageSubject":"私のAWSアカウントの利用料金" // 通知で表示する題名
-    }
+  "timeout": 6,
+  "memory": 128
 }
 ```
 
+### 環境設定ファイルの作成と編集
+```
+cp variables.sample.conf variables.conf
+vim src/lambda.json
+```
+
+書き換え例) 
+variables.conf
+```
+slackPostURL="https://hooks.slack.com/services/*****"
+slackChannel="#aws課金通知"
+messageSubject="私のAWSアカウントの利用料金"
+budgetDollar=50
+```
 
 ### srcディレクトリの内容をlambda-uploaderでデプロイ
 ```
-cd src
-lambda-uploader
+sh deploy.sh
 ```
 
 ### Lambda定期実行設定
