@@ -85,7 +85,7 @@ src/lambda.json
 ### 環境設定ファイルの作成と編集
 ```
 cp variables.sample.conf variables.conf
-vim src/lambda.json
+vim variables.conf
 ```
 
 書き換え例) 
