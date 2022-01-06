@@ -15,6 +15,8 @@ logger.setLevel(logging.INFO)
 SLACK_POST_URL = os.environ['slackPostURL']
 SLACK_CHANNEL = os.environ['slackChannel']
 MESSAGE_SUBJECT = os.environ['messageSubject']
+BUDGET_DOLLAR = int(os.environ['budgetDollar'])
+
 
 response = boto3.client('cloudwatch', region_name='us-east-1')
 
@@ -36,14 +38,14 @@ cost = get_metric_statistics['Datapoints'][0]['Maximum']
 date = get_metric_statistics['Datapoints'][0]['Timestamp'].strftime('%Y年%m月%d日')
 
 def build_message(cost):
-    if float(cost) >= 10.0:
+    if float(cost) >= BUDGET_DOLLAR:
         color = "#ff0000" #red
     elif float(cost) > 0.0:
         color = "warning" #yellow
     else:
         color = "good"    #green
 
-    text = "%sまでのAWSの料金は、$%sです。" % (date, cost)
+    text = "%sまでのAWSの料金は、$%sです。(予算 $%s)" % (date, cost, BUDGET_DOLLAR)
 
     atachements = {"title": MESSAGE_SUBJECT,"text":text,"color":color}
     return atachements
@@ -53,13 +55,12 @@ def lambda_handler(event, context):
 
     # SlackにPOSTする内容をセット
     slack_message = {
-        'channel': SLACK_CHANNEL,
-        "attachments": [content],
+        "attachments": [content]
     }
 
-    # SlackにPOST
+    # SlackにPOST   
     try:
         req = requests.post(SLACK_POST_URL, data=json.dumps(slack_message))
-        logger.info("Message posted to %s", slack_message['channel'])
+        logger.info("Message posted to %s", SLACK_CHANNEL)
     except requests.exceptions.RequestException as e:
         logger.error("Request failed: %s", e)
